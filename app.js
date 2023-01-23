@@ -1,7 +1,24 @@
 let dataUser;
 
+const refreshButton = document.getElementById("refresh-button");
 const profileImage = document.getElementById("user-img");
 const userName = document.getElementById("user-name");
+const contactList = document.getElementById("contact-list");
+
+// FETCH API DATA
+function getData() {
+  fetch("https://randomuser.me/api/")
+    .then((response) => response.json())
+    .then((responseData) => {
+      dataUser = responseData.results[0];
+
+      generateNameHeader(dataUser);
+      generateContactList(dataUser);
+
+      profileImage.src = dataUser.picture["large"];
+    })
+    .catch((error) => console.error(error));
+}
 
 function generateNameHeader(data) {
   const logo = userName.querySelector(".logo");
@@ -47,7 +64,6 @@ function generateContactList(data) {
     },
   ];
 
-  const contactList = document.getElementById("contact-list");
   contactData.forEach((item) => {
     let li = document.createElement("li");
     li.innerHTML = `${item.icon}<div><p>${item.title}</p><p>${item.subtitle}</p></div>`;
@@ -55,15 +71,10 @@ function generateContactList(data) {
   });
 }
 
-fetch("https://randomuser.me/api/")
-  .then((response) => response.json())
-  .then((responseData) => {
-    dataUser = responseData.results[0];
-    console.log(dataUser);
+// RELOAD DATA
+refreshButton.onclick = () => {
+  contactList.innerHTML = "";
+  getData();
+};
 
-    generateNameHeader(dataUser);
-    generateContactList(dataUser);
-
-    profileImage.src = dataUser.picture["large"];
-  })
-  .catch((error) => console.error(error));
+getData();
