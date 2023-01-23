@@ -59,6 +59,7 @@ fetch("https://randomuser.me/api/")
   .then((response) => response.json())
   .then((responseData) => {
     dataUser = responseData.results[0];
+    console.log(dataUser);
 
     generateNameHeader(dataUser);
     generateContactList(dataUser);
