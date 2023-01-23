@@ -318,6 +318,9 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+  #user-name .title {
+    padding: 10px 25px;
+  }
   .user-description,
   .content {
     padding: 5% 3%;
