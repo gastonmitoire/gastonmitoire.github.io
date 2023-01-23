@@ -185,6 +185,7 @@ body {
 }
 
 .content .contact ul li svg {
+  min-height: 35px;
   max-height: 35px;
   stroke-width: 2px;
   padding: 5px;
